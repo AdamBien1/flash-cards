@@ -1,80 +1,110 @@
-.card-miniature {
-  position: relative;
-  padding: 1rem;
+.card-miniatures {
+  display: flex;
+  justify-content: start;
+  align-items: center;
 
-  .face {
-    width: 250px;
-    height: 180px;
-    transition: all 400ms ease-out;
+  .card-miniature {
+    position: relative;
+    padding: 1rem;
 
-    &.face-1 {
-      position: relative;
-      background-color: #333333;
-      z-index: 1;
-      transform: translateY(90px);
+    .face {
+      width: 250px;
+      height: 180px;
+      transition: all 400ms ease-out;
 
-      .content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0.5;
-        transition: all 200ms ease-out;
+      &.face-1 {
+        position: relative;
+        background-color: $secondary-color;
+        z-index: 1;
+        transform: translateY(90px);
+
+        .content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0.6;
+          transition: all 200ms ease-out;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .icon-outer {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            transition: all 300ms ease-out;
+            //   box-shadow: 0 0 10px rgba(#ffffff, 0.4);
+
+            .icon {
+              width: 100%;
+            }
+          }
+
+          h3 {
+            margin: 10px 0 0;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      &.face-2 {
+        position: relative;
+        background-color: #ffffff;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
+        padding: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        transform: translateY(-90px);
 
-        img {
-          width: 90px;
-          border: 4px solid transparent;
-          border-radius: 50%;
+        .author {
+          position: absolute;
+          top: 5%;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.6rem;
+          color: $secondary-color;
+
+          span {
+            font-style: italic;
+          }
         }
 
-        h3 {
-          margin: 10px 0;
-          color: #ffffff;
-          text-align: center;
-          font-size: 1.2rem;
+        p {
+          font-size: 0.9rem;
+          margin: 5px 0;
         }
       }
     }
 
-    &.face-2 {
-      position: relative;
-      background-color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-      transform: translateY(-90px);
+    &:hover {
+      .face.face-1 {
+        transform: translateY(0px);
+        background-color: darken($primary-color, 20);
+        .content {
+          opacity: 1;
 
-      p {
-        margin-bottom: 12px;
+          .icon-outer {
+            border: 2px solid #ffffff;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .face.face-2 {
+        transform: translateY(0px);
       }
     }
   }
 
-  &:hover {
-    .face.face-1 {
-      transform: translateY(0px);
-      background-color: darken($primary-color, 20);
-      .content {
-        opacity: 1;
-
-        img {
-          border: 4px solid #fff;
-          width: 90px;
-        }
-      }
-    }
-  }
-
-  &:hover {
-    .face.face-2 {
-      transform: translateY(0px);
-    }
+  .create-new {
+    margin-left: 40px;
   }
 }
