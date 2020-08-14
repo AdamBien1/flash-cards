@@ -1,2 +1,12 @@
 $primary-color: #ddf0ff;
 $secondary-color: #555;
+$modal-duration: 600ms;
+
+@keyframes modal-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -25,7 +25,7 @@
           <h4>Hello, <span id="user-name"> Adam</span></h4>
         </div>
         <div class="buttons">
-          <div class="btn btn-primary show">
+          <div class="btn btn-primary">
             <a href="#" id="log-out" class="log-out"
               >Log out
               <div class="border border-1"></div>
@@ -34,7 +34,7 @@
               <div class="border border-4"></div>
             </a>
           </div>
-          <div class="btn">
+          <div class="btn show">
             <a href="#" id="sign-up" class="sign-up"
               >Sign-up
               <div class="border border-1"></div>
@@ -43,8 +43,8 @@
               <div class="border border-4"></div>
             </a>
           </div>
-          <div class="btn">
-            <a href="#" id="sign-in" class="sign-in"
+          <div class="btn show">
+            <a href="#" id="log-in" class="log-in"
               >Sign-in
               <div class="border border-1"></div>
               <div class="border border-2"></div>
@@ -124,14 +124,92 @@
       </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER START -->
     <footer class="footer">
       Copyright © 2020, All Rights Reserveds
       <a href="https://github.com/AdamBien1/flash-cards" target="_blank">
         <i class="fab fa-github"></i>
       </a>
-
     </footer>
+    <!-- FOOTER END -->
+
+    <!-- LOG IN MODAL -->
+    <div class="modal-container">
+      <div class="modal">
+        <button class="modal-close" id="modal-close">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-header">
+          <h3>Log In</h3>
+        </div>
+        <div class="modal-content">
+          Log in to see other users' cards and edit yours or <a href="#">Sign up</a> and create your account.
+          <form class="modal-form">
+            <div>
+              <label for="username">Username</label>
+              <input type="text" name="username" id="log-in-username" placeholder="Enter username..." class="form-input">
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input type="password" name="password" id="log-in-password" placeholder="Enter password..." class="form-input">
+            </div>
+            <!-- SUBMIT BTN -->
+            <div class="btn">
+              <a href="#" id="modal-log-in" class="modal-log-in"> Log In
+                <div class="border border-1"></div>
+                <div class="border border-2"></div>
+                <div class="border border-3"></div>
+                <div class="border border-4"></div>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END LOG IN MODAL -->
+
+        <!-- SIGN UP MODAL -->
+        <div class="modal-container">
+          <div class="modal">
+            <button class="modal-close" id="modal-close">
+              <i class="fa fa-times"></i>
+            </button>
+            <div class="modal-header">
+              <h3>Sign Up</h3>
+            </div>
+            <div class="modal-content">
+              Register with us to create your own flash cards!
+              <form class="modal-form">
+                <div>
+                  <label for="username">Username</label>
+                  <input type="text" name="username" id="sign-up-username" placeholder="Enter username..." class="form-input">
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="sign-up-email" placeholder="Enter email..." class="form-input">
+                </div>
+                <div>
+                  <label for="password">Password</label>
+                  <input type="password" name="password" id="sign-up-password1" placeholder="Enter password..." class="form-input">
+                </div>
+                <div>
+                  <label for="password">Confirm Password</label>
+                  <input type="password" name="password" id="sign-up-password2" placeholder="Confirm Password..." class="form-input">
+                </div>
+                <!-- SUBMIT BTN -->
+                <div class="btn">
+                  <a href="#" id="modal-sign-up" class="modal-log-in"> Sign Up
+                    <div class="border border-1"></div>
+                    <div class="border border-2"></div>
+                    <div class="border border-3"></div>
+                    <div class="border border-4"></div>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- END SIGN UP MODAL -->
 
     <script src="../js/app.js"></script>
   </body>
