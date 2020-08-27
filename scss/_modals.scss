@@ -39,7 +39,25 @@
 
     &-form {
       div:not(.border) {
-        margin: 15px 0;
+        margin: 12px 0;
+
+        &.success {
+          .form-input {
+            border-color: $success-color;
+          }
+        }
+
+        &.error {
+          .form-input {
+            border-color: $error-color;
+          }
+        }
+
+        small {
+          margin-top: 4px;
+          color: $error-color;
+          display: none;
+        }
       }
 
       label {
@@ -48,22 +66,22 @@
       }
 
       .form-input {
-        padding: 8px;
+        padding: 6px;
         width: 100%;
+        border: 1px solid #262626;
+        border-radius: 2px;
 
         &:focus {
           outline: none;
         }
       }
 
-      .modal-log-in {
+      .modal-log-in,
+      .modal-sign-up {
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
-
-        a {
-        }
       }
     }
 

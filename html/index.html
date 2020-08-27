@@ -16,7 +16,9 @@
     <nav class="navbar">
       <div class="logo">
         <i class="fas fa-brain"></i>
-        <h1>FlashCards</h1>
+        <a href="./index.html">
+          <h1>FlashCards</h1>
+        </a>
       </div>
 
       <div class="profile">
@@ -59,7 +61,7 @@
     <main class="container">
       <!-- Card 1 -->
       <div class="card-miniatures" id="card-miniatures">
-        <div class="card-miniature">
+        <div class="card-miniature" data-cards-id = "0">
           <div class="face face-1">
             <div class="content">
               <div class="icon-outer">
@@ -74,7 +76,7 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, error at laborum porro molestias quod quos? Consequuntur eaque quasi dolores.</p>
             </div>
             <div class="btn">
-              <a href="#" id="go-to" class="go-to"
+              <a href="./view-cards.html" target="_self" id="go-to" class="go-to"
                 >Go to
                 <div class="border border-1"></div>
                 <div class="border border-2"></div>
@@ -85,7 +87,7 @@
           </div>
         </div>
         <!-- Card 2 -->
-        <div class="card-miniature">
+        <div class="card-miniature" data-cards-id = "1">
           <div class="face face-1">
             <div class="content">
               <div class="icon-outer">
@@ -100,7 +102,7 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia magni facilis vero commodi at cumque eaque sed! Culpa, aliquam quaerat?!</p>
             </div>
             <div class="btn">
-              <a href="#" id="go-to" class="go-to"
+              <a href="./view-cards.html" target="_self" id="go-to" class="go-to"
                 >Go to
                 <div class="border border-1"></div>
                 <div class="border border-2"></div>
@@ -126,7 +128,7 @@
 
     <!-- FOOTER START -->
     <footer class="footer">
-      Copyright © 2020, All Rights Reserveds
+      Copyright © 2020, All Rights Reserved
       <a href="https://github.com/AdamBien1/flash-cards" target="_blank">
         <i class="fab fa-github"></i>
       </a>
@@ -183,22 +185,26 @@
                 <div>
                   <label for="username">Username</label>
                   <input type="text" name="username" id="sign-up-username" placeholder="Enter username..." class="form-input">
+                  <small>Error message</small>
                 </div>
                 <div>
                   <label for="email">Email</label>
                   <input type="email" name="email" id="sign-up-email" placeholder="Enter email..." class="form-input">
+                  <small>Error message</small>
                 </div>
                 <div>
                   <label for="password">Password</label>
                   <input type="password" name="password" id="sign-up-password1" placeholder="Enter password..." class="form-input">
+                  <small>Error message</small>
                 </div>
                 <div>
                   <label for="password">Confirm Password</label>
                   <input type="password" name="password" id="sign-up-password2" placeholder="Confirm Password..." class="form-input">
+                  <small>Error message</small>
                 </div>
                 <!-- SUBMIT BTN -->
                 <div class="btn">
-                  <a href="#" id="modal-sign-up" class="modal-log-in"> Sign Up
+                  <a href="#" id="modal-sign-up" class="modal-sign-up"> Sign Up
                     <div class="border border-1"></div>
                     <div class="border border-2"></div>
                     <div class="border border-3"></div>
@@ -211,6 +217,6 @@
         </div>
         <!-- END SIGN UP MODAL -->
 
-    <script src="../js/app.js"></script>
+    <script type="module" src="../js/app.js"></script>
   </body>
 </html>
