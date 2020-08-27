@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Cards</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.min.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <a href="./index.html">
+          <h1>FlashCards</h1>
+      </a>
+      </div>
+
+      <div class="profile">
+        <div class="user show">
+          <i class="fas fa-user"></i>
+          <h4>Hello, <span id="user-name"> Adam</span></h4>
+        </div>
+        <div class="buttons">
+          <div class="btn btn-primary">
+            <a href="#" id="log-out" class="log-out"
+              >Log out
+              <div class="border border-1"></div>
+              <div class="border border-2"></div>
+              <div class="border border-3"></div>
+              <div class="border border-4"></div>
+            </a>
+          </div>
+          <div class="btn show">
+            <a href="#" id="sign-up" class="sign-up"
+              >Sign-up
+              <div class="border border-1"></div>
+              <div class="border border-2"></div>
+              <div class="border border-3"></div>
+              <div class="border border-4"></div>
+            </a>
+          </div>
+          <div class="btn show">
+            <a href="#" id="log-in" class="log-in"
+              >Sign-in
+              <div class="border border-1"></div>
+              <div class="border border-2"></div>
+              <div class="border border-3"></div>
+              <div class="border border-4"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container view-cards-container" >
+    <div class="cards-container" id="cards-container">
+     <!-- <div class="card active">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              Whit is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              a programming language
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              Whit is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              a programming language
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              Whit is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              a programming language
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              Whit is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              a programming language
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="navigation">
+        <button id="prev" class="nav-button">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+  
+        <p id="current"></p>
+  
+        <button id="next" class="nav-button">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </main>
+
+    <!-- FOOTER START -->
+    <footer class="footer">
+      Copyright © 2020, All Rights Reserved
+      <a href="https://github.com/AdamBien1/flash-cards" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </footer>
+    <!-- FOOTER END -->
+
+    <script src="../js/view-cards.js"></script>
+  </body>
+</html>
