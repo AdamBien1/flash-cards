@@ -3,6 +3,25 @@
   justify-content: start;
   align-items: center;
 
+  button.prev-arrow,
+  button.next-arrow {
+    margin: 0 1rem;
+    background-color: transparent;
+    border: none;
+    color: #262626;
+    cursor: pointer;
+    display: none;
+
+    &:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+
+    &.show {
+      display: block;
+    }
+  }
+
   .card-miniature {
     position: relative;
     padding: 1rem;

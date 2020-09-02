@@ -1,0 +1,141 @@
+.create-cards-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h3 {
+    width: 150%;
+    color: $secondary-color;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: 10px;
+    margin: 2rem 0;
+    text-align: center;
+    font-size: 1.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  #add-card-form {
+    width: 100%;
+    position: relative;
+
+    label {
+      font-size: 0.9rem;
+    }
+
+    .form-input {
+      margin: 0.75rem 0;
+      padding: 6px;
+      width: 100%;
+      border: 1px solid #262626;
+      border-radius: 2px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .btn {
+      margin: 1.3rem 0;
+      width: 80%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .add-card-btn {
+        width: 100%;
+      }
+    }
+
+    .save-cards {
+      padding: 0.7rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50%;
+      background-color: $success-color;
+      color: $secondary-color;
+      position: absolute;
+      bottom: calc(1.3rem - 0.35rem);
+      right: 5%;
+      cursor: not-allowed;
+
+      &:hover {
+        opacity: 0.95;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .list {
+    list-style-type: none;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .list li {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.48);
+    color: $secondary-color;
+    display: flex;
+    justify-content: start;
+    position: relative;
+    padding: 10px 15px;
+    margin: 10px 0;
+
+    .close-btn {
+      color: inherit;
+      border: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 10px 15px;
+      background-color: darken($primary-color, 10);
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .text-question {
+      transform: translateY(0);
+      opacity: 1;
+      transition: 150ms all ease-in;
+    }
+
+    .text-answer {
+      transition: 150ms all ease-in;
+      position: absolute;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    &:hover {
+      .text-question {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      .text-answer {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .answer,
+    .question {
+      text-indent: 20px;
+      color: #262626;
+    }
+  }
+}

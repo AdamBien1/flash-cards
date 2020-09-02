@@ -11,6 +11,7 @@ let currentActiveCard = 0;
 const cardsEl = [];
 const cardsData = getCardsData();
 
+// Shuffles to the next card
 nextBtn.addEventListener("click", () => {
   cardsEl[currentActiveCard].className = "card left";
   currentActiveCard++;
@@ -23,6 +24,7 @@ nextBtn.addEventListener("click", () => {
   updateCurrentText();
 });
 
+// Shuffles to the previous card
 prevBtn.addEventListener("click", () => {
   cardsEl[currentActiveCard].className = "card right";
   currentActiveCard--;
@@ -35,6 +37,7 @@ prevBtn.addEventListener("click", () => {
   updateCurrentText();
 });
 
+// Updates index of card displayed
 function updateCurrentText() {
   currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
 }
@@ -45,10 +48,12 @@ function getCardsData() {
   return cards === null ? [] : cards;
 }
 
+// Displays cards in DOM
 function createCards() {
   cardsData[passIndex].body.forEach((data, index) => createCard(data, index));
 }
 
+// Creates card element
 function createCard(data, index) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -79,6 +84,7 @@ function createCard(data, index) {
   updateCurrentText();
 }
 
+// Searches for passIndex to display proper cards
 (function () {
   passIndex = localStorage.getItem("passIndex");
 })();

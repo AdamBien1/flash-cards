@@ -24,7 +24,7 @@
       <div class="profile">
         <div class="user show">
           <i class="fas fa-user"></i>
-          <h4>Hello, <span id="user-name"> User</span></h4>
+          <h4>Hello, <span id="user-name"> Adam</span></h4>
         </div>
         <div class="buttons">
           <div class="btn btn-primary">
@@ -58,27 +58,59 @@
       </div>
     </nav>
 
-    <main class="container">
-      <div class="card-miniatures" id="card-miniatures">
-        <button class="prev-arrow">
-          <i class="fas fa-chevron-left fa-3x"></i>
-        </button>
+    <main class="container create-cards-container">
+      <h3 id="card-title" contenteditable="true" maxlength="20">
+        New deck title
+      </h3>
 
-        <!-- CREATE BUTTON -->
+      <!-- FORM START -->
+      <form id="add-card-form">
+        <label for="question">Question: </label>
+        <input
+          type="text"
+          name="answer"
+          class="form-input"
+          id="question"
+          placeholder="Enter question... (front of the card)"
+        />
+        <label for="answer">Answer: </label>
+        <input
+          type="text"
+          name="answer"
+          class="form-input"
+          id="answer"
+          placeholder="Enter answer... (back of the card)"
+        />
         <div class="btn">
-          <a href="create-cards.html" id="create-new" class="create-new"
-            ><i class="fas fa-plus"></i> Create new cards
+          <button href="#" id="add-card-btn" class="add-card-btn">
+            Add Card
             <div class="border border-1"></div>
             <div class="border border-2"></div>
             <div class="border border-3"></div>
             <div class="border border-4"></div>
-          </a>
+          </button>
         </div>
-
-        <button class="next-arrow">
-          <i class="fas fa-chevron-right fa-3x"></i>
+        <button type="button" id="save-cards" class="save-cards">
+          <i class="fas fa-check"></i>
         </button>
-      </div>
+      </form>
+      <!-- FORM END -->
+
+      <!-- LIST START -->
+      <ul id="list" class="list">
+        <li>
+          <span class="close-btn"><i class="fas fa-times"></i></span>
+          <span class="text-question">
+            <strong>Question: </strong>
+            <span class="question">What is JavaScript?</span>
+          </span>
+          <span class="text-answer">
+            <strong>Answer: </strong>
+            <span class="answer">Programming Language</span>
+          </span>
+        </li>
+      </ul>
+      <!-- LIST END -->
     </main>
 
     <!-- FOOTER START -->
@@ -211,6 +243,6 @@
     </div>
     <!-- END SIGN UP MODAL -->
 
-    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/create-cards.js"></script>
   </body>
 </html>
