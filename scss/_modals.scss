@@ -31,6 +31,17 @@
       background-color: $primary-color;
       color: $secondary-color;
       padding: 1rem;
+
+      .info {
+        display: block;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        color: darken($secondary-color, 20);
+        font-size: 0.7rem;
+        padding: 5px;
+        margin-top: 5px;
+        text-align: center;
+      }
     }
 
     &-content {

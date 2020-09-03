@@ -1,5 +1,4 @@
 import { createMiniature } from "./display-miniatures.js";
-import { start } from "repl";
 
 export { initCarousel };
 
@@ -40,8 +39,10 @@ function disableArrows(cardsArr) {
     .querySelector(".card-miniature")
     .getAttribute("data-cards-id");
   let farRightID = document
-    .querySelectorAll(".card-miniature")[2]
+    .querySelector(".card-miniature:last-child")
     .getAttribute("data-cards-id");
+
+  console.log(farLeftID, farRightID);
 
   if (parseInt(farLeftID) === 0) {
     prevBtn.classList.add("disabled");
@@ -56,6 +57,14 @@ function disableArrows(cardsArr) {
   }
 }
 
+function clearMiniatures() {
+  const miniatures = document.querySelectorAll(".card-miniature");
+
+  miniatures.forEach((miniature) => {
+    miniature.remove();
+  });
+}
+
 function initCarousel(cardsArr) {
   let startID = 0;
   displayCarouselBtns(moreThanThreeDecks());
@@ -64,6 +73,7 @@ function initCarousel(cardsArr) {
 
   prevBtn.addEventListener("click", () => {
     if (!prevBtn.classList.contains("disabled")) {
+      clearMiniatures();
       startID--;
       displayThreeDecks(cardsArr, startID);
       disableArrows(cardsArr);
@@ -72,6 +82,7 @@ function initCarousel(cardsArr) {
 
   nextBtn.addEventListener("click", () => {
     if (!nextBtn.classList.contains("disabled")) {
+      clearMiniatures();
       startID++;
       displayThreeDecks(cardsArr, startID);
       disableArrows(cardsArr);

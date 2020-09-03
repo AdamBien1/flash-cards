@@ -24,10 +24,17 @@ function checkEmail(input) {
 }
 
 function getFieldName(field) {
-  return (
-    field.id.replace("sign-up-", "").charAt(0).toUpperCase() +
-    field.id.replace("sign-up-", "").slice(1)
-  );
+  if (field.id.includes("sign-up-")) {
+    return (
+      field.id.replace("sign-up-", "").charAt(0).toUpperCase() +
+      field.id.replace("sign-up-", "").slice(1)
+    );
+  } else if (field.id.includes("log-in-")) {
+    return (
+      field.id.replace("log-in-", "").charAt(0).toUpperCase() +
+      field.id.replace("log-in-", "").slice(1)
+    );
+  }
 }
 
 // Check required fields
@@ -69,7 +76,7 @@ function checkPasswordsMatch(input1, input2) {
   }
 }
 
-function checkAll(username, email, password1, password2) {
+function checkRegister(username, email, password1, password2) {
   checkRequired([username, email, password1, password2]);
   checkLengh([
     { input: username, min: 3, max: 15 },
@@ -79,4 +86,12 @@ function checkAll(username, email, password1, password2) {
   checkPasswordsMatch(password1, password2);
 }
 
-export { checkAll };
+function checkLogin(username, password) {
+  checkRequired([username, password]);
+  checkLengh([
+    { input: username, min: 3, max: 15 },
+    { input: password, min: 6, max: 26 },
+  ]);
+}
+
+export { checkRegister, checkLogin };

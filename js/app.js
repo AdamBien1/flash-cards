@@ -1,4 +1,4 @@
-import { checkAll } from "./register.js";
+import { checkRegister, checkLogin } from "./register-login.js";
 // import { createMiniature } from "./display-miniatures.js";
 import { greatBritain, germany } from "./base64-imgs.js";
 import { initCarousel } from "./carousel.js";
@@ -94,13 +94,21 @@ signUpBtn.addEventListener("click", () => {
   const password2 = document.querySelector("#sign-up-password2");
 
   modalButton.addEventListener("click", () => {
-    checkAll(username, email, password1, password2);
+    checkRegister(username, email, password1, password2);
   });
 });
 
 // Display LOG IN modal
 logInBtn.addEventListener("click", () => {
   modalArr[0].parentElement.classList.add("show");
+
+  const modalButton = document.querySelector("#modal-log-in");
+  const username = document.querySelector("#log-in-username");
+  const password = document.querySelector("#log-in-password");
+
+  modalButton.addEventListener("click", () => {
+    checkLogin(username, password);
+  });
 });
 // Closes SIGN UP/ LOG IN modals on CLOSE-BTN click
 modalCloseBtnArr.forEach((button, index) => {
