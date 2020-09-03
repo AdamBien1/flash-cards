@@ -105,6 +105,14 @@ main.container {
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    button.prev-arrow {
+      order: -1;
+    }
+
+    button.next-arrow {
+      order: 5;
+    }
   }
 
   &.view-cards-container {

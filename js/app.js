@@ -1,6 +1,7 @@
 import { checkAll } from "./register.js";
-import { createMiniature } from "./display-miniatures.js";
+// import { createMiniature } from "./display-miniatures.js";
 import { greatBritain, germany } from "./base64-imgs.js";
+import { initCarousel } from "./carousel.js";
 
 // INDEX.HTML VARS
 const modalCloseBtnArr = document.querySelectorAll("#modal-close");
@@ -131,7 +132,9 @@ window.addEventListener("click", (e) => {
   }
 
   const cards = JSON.parse(localStorage.getItem("cards"));
-  cards.forEach((card) => {
-    createMiniature(card);
-  });
+  // cards.forEach((card) => {
+  //   createMiniature(card);
+  // });
+
+  initCarousel(cards);
 })();
