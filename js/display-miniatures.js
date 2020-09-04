@@ -1,3 +1,5 @@
+let modify = false;
+
 const cardMiniatures = document.querySelector("#card-miniatures");
 
 // Creates HTML card miniature in index.html
@@ -26,14 +28,33 @@ function createMiniature(cardObject) {
         >
         <p>${cardObject.description}</p>
       </div>
-      <div class="btn">
-        <a href="./view-cards.html" target="_self" class="go-to"
-          >Go to
-          <div class="border border-1"></div>
-          <div class="border border-2"></div>
-          <div class="border border-3"></div>
-          <div class="border border-4"></div>
-        </a>
+      <div class="buttons">
+        <div class="btn">
+          <a href="./view-cards.html" target="_self" class="go-to"
+            >Go to
+            <div class="border border-1"></div>
+            <div class="border border-2"></div>
+            <div class="border border-3"></div>
+            <div class="border border-4"></div>
+          </a>
+        </div>
+        ${(() => {
+          if (cardObject.id > 1) {
+            return `
+              <div class="btn">
+              <button class="modify go-to" onclick="openModifyPage()"
+                >Modify
+                <div class="border border-1"></div>
+                <div class="border border-2"></div>
+                <div class="border border-3"></div>
+                <div class="border border-4"></div>
+              </button>
+            </div>
+            `;
+          } else {
+            return "";
+          }
+        })()}
       </div>
     </div>
     `;
@@ -41,4 +62,18 @@ function createMiniature(cardObject) {
   cardMiniatures.appendChild(div);
 }
 
-export { createMiniature };
+window.openModifyPage = openModifyPage;
+function openModifyPage() {
+  modify = true;
+  localStorage.setItem("modify", modify);
+  window.location.replace("../html/create-cards.html");
+}
+
+window.openCreatePage = openCreatePage;
+function openCreatePage() {
+  modify = false;
+  localStorage.setItem("modify", modify);
+  window.location.replace("../html/create-cards.html");
+}
+
+export { createMiniature, openCreatePage };

@@ -111,6 +111,17 @@
           font-size: 0.9rem;
           margin: 5px 0;
         }
+
+        .buttons {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+
+          & > .btn:first-child {
+            margin-right: 0.6rem;
+          }
+        }
       }
     }
 

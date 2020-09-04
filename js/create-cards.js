@@ -5,8 +5,13 @@ const form = document.querySelector("#add-card-form");
 const question = document.querySelector("#question");
 const answer = document.querySelector("#answer");
 const cardTitle = document.querySelector("#card-title");
+const cardDescription = document.querySelector("#card-description");
 const saveCardsBtn = document.querySelector("#save-cards");
+const deleteCardsBtn = document.querySelector("#delete-cards");
 
+let localStorageCards;
+let passIndex;
+let modify = false;
 let cards = [];
 
 // Restrics user for using more characters in the title, than specified
@@ -19,12 +24,38 @@ cardTitle.addEventListener("keydown", (e) => {
   }
 });
 
+// Restrics user for using more characters in the description, than specified
+cardDescription.addEventListener("keydown", (e) => {
+  const maxLength = parseInt(cardDescription.getAttribute("maxlength"));
+  console.log(cardDescription.innerText.length);
+
+  if (cardDescription.innerText.length === maxLength && e.keyCode != 8) {
+    e.preventDefault();
+  }
+});
+
 cardTitle.addEventListener("focus", () => selectElementContents(cardTitle));
 
+cardDescription.addEventListener("focus", () =>
+  selectElementContents(cardDescription)
+);
+
+// Listener for saving new or modified card decks in LocalStorage
 saveCardsBtn.addEventListener("click", () => {
   if (window.getComputedStyle(saveCardsBtn).cursor !== "not-allowed") {
-    cards = setIDs(cards);
-    saveInLocalStorage(cards);
+    if (validateTitle() & validateDescription()) {
+      cards = setIDs(cards);
+      saveInLocalStorage(cards, modify);
+    }
+  }
+});
+
+// Listener for deleting a card deck from LocalStorage (only in modify-mode)
+deleteCardsBtn.addEventListener("click", () => {
+  if (modify) {
+    localStorageCards.splice(passIndex, 1);
+    localStorage.setItem("cards", JSON.stringify(localStorageCards));
+    window.location.replace("../html/index.html");
   }
 });
 
@@ -41,16 +72,41 @@ function selectElementContents(contenteditable) {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   addCard();
-  console.log("submit");
-  console.log(cards);
 });
-
-init();
 
 // Loads cards from Array
 function init() {
   list.innerHTML = "";
   cards.forEach((card) => addCardDOM(card));
+}
+
+// Checks if title has been changed and it's not empty
+function validateTitle() {
+  if (
+    cardTitle.innerText.trim() === "Name your deck!" ||
+    cardTitle.innerText.trim() === ""
+  ) {
+    cardTitle.style.borderColor = "#e74c3c";
+    return false;
+  } else {
+    cardTitle.style.borderColor = "#ddf0ff";
+    return true;
+  }
+}
+
+// Checks if description has been changed and it's not empty
+function validateDescription() {
+  if (
+    cardDescription.innerText.trim() ===
+      "Deck description: Tell everyone what your custom deck is all about!" ||
+    cardDescription.innerText.trim() === ""
+  ) {
+    cardDescription.style.border = "solid 1px #e74c3c";
+    return false;
+  } else {
+    cardDescription.style.border = "none";
+    return true;
+  }
 }
 
 // Creates card object and adds it to the Array
@@ -79,6 +135,7 @@ function addCard(e) {
     question.style.borderColor = "#262626";
     answer.value = "";
     answer.style.borderColor = "#262626";
+    console.log(modify);
   }
 }
 
@@ -131,24 +188,65 @@ function setIDs(cardsArr) {
 }
 
 // Saves completed deck to Local Storage and return to index.html
-function saveInLocalStorage(cardsArr) {
-  let localStorageCards =
-    localStorage.getItem("cards") !== null
-      ? JSON.parse(localStorage.getItem("cards"))
-      : [];
+function saveInLocalStorage(cardsArr, modify) {
+  // Pushes new item into LocalStorage
+  if (!modify) {
+    localStorageCards =
+      localStorage.getItem("cards") !== null
+        ? JSON.parse(localStorage.getItem("cards"))
+        : [];
 
-  let deck = {
-    id: localStorageCards.length,
-    img: customer,
-    title: cardTitle.innerText.trim(),
-    author: "user",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad voluptas ipsam dolor!",
-    body: cardsArr,
-  };
+    let deck = {
+      id: localStorageCards.length,
+      img: customer,
+      title: cardTitle.innerText.trim(),
+      author: "user",
+      description: cardDescription.innerText.trim(),
+      body: cardsArr,
+    };
 
-  localStorageCards.push(deck);
-  console.log(localStorageCards);
-  localStorage.setItem("cards", JSON.stringify(localStorageCards));
-  window.location.replace("../html/index.html");
+    // Modifies existing decks and overrides LocalStorage item
+    localStorageCards.push(deck);
+    console.log(localStorageCards);
+    localStorage.setItem("cards", JSON.stringify(localStorageCards));
+    window.location.replace("../html/index.html");
+  } else {
+    let deck = {
+      id: passIndex,
+      img: customer,
+      title: cardTitle.innerText.trim(),
+      author: "user",
+      description: cardDescription.innerText.trim(),
+      body: cardsArr,
+    };
+
+    localStorageCards[passIndex] = deck;
+    localStorage.setItem("cards", JSON.stringify(localStorageCards));
+    window.location.replace("../html/index.html");
+  }
 }
+
+(function () {
+  modify = JSON.parse(localStorage.getItem("modify"));
+
+  if (modify) {
+    passIndex = JSON.parse(localStorage.getItem("passIndex"));
+    localStorageCards = JSON.parse(localStorage.getItem("cards"));
+
+    cardTitle.innerText = localStorageCards[passIndex].title;
+    cardDescription.innerText = localStorageCards[passIndex].description;
+
+    localStorageCards[passIndex].body.forEach((card) => {
+      cards.push(card);
+    });
+    init();
+    console.log(cards);
+
+    saveCardsBtn.classList.add("modify-cards");
+    deleteCardsBtn.classList.add("modify-cards");
+  } else {
+    init();
+    saveCardsBtn.classList.remove("modify-cards");
+    deleteCardsBtn.classList.remove("modify-cards");
+  }
+})();

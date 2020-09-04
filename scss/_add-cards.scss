@@ -8,11 +8,11 @@
   text-align: center;
 
   h3 {
-    width: 150%;
+    width: 120%;
     color: $secondary-color;
     border-bottom: 2px solid $primary-color;
     padding-bottom: 10px;
-    margin: 2rem 0;
+    margin: 1rem 0;
     text-align: center;
     font-size: 1.5rem;
 
@@ -21,16 +21,34 @@
     }
   }
 
+  #card-description {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.05);
+    // border: 1px solid #262626;
+    border-radius: 2px;
+    padding: 0.3rem;
+    text-align: left;
+    font-size: 0.9rem;
+    color: $secondary-color;
+    margin-bottom: 2rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  h4 {
+    color: $secondary-color;
+    margin-bottom: 0.75rem;
+  }
+
   #add-card-form {
     width: 100%;
     position: relative;
 
-    label {
-      font-size: 0.9rem;
-    }
-
     .form-input {
-      margin: 0.75rem 0;
+      margin: 0.3rem 0;
       padding: 6px;
       width: 100%;
       border: 1px solid #262626;
@@ -38,6 +56,10 @@
 
       &:focus {
         outline: none;
+      }
+
+      &::placeholder {
+        color: $secondary-color;
       }
     }
 
@@ -54,17 +76,24 @@
       }
     }
 
-    .save-cards {
-      padding: 0.7rem;
+    .save-cards,
+    .delete-cards {
+      width: 2.2rem;
+      height: 2.2rem;
       font-size: 1rem;
       border: none;
       border-radius: 50%;
       background-color: $success-color;
       color: $secondary-color;
       position: absolute;
-      bottom: calc(1.3rem - 0.35rem);
+      bottom: 1.1rem;
       right: 5%;
       cursor: not-allowed;
+
+      &.modify-cards {
+        right: 10%;
+        cursor: pointer;
+      }
 
       &:hover {
         opacity: 0.95;
@@ -72,6 +101,16 @@
 
       &:focus {
         outline: none;
+      }
+    }
+
+    .delete-cards {
+      display: none;
+      background-color: $error-color;
+
+      &.modify-cards {
+        display: inline;
+        transform: translateX(3rem);
       }
     }
   }

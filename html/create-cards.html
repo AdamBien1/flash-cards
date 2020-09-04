@@ -60,12 +60,17 @@
 
     <main class="container create-cards-container">
       <h3 id="card-title" contenteditable="true" maxlength="20">
-        New deck title
+        Name your deck!
       </h3>
 
+      <p id="card-description" contenteditable="true" maxlength="110">
+        <strong>Deck description:</strong>
+        Tell everyone what your custom deck is all about!
+      </p>
+
+      <h4>Add cards below!</h4>
       <!-- FORM START -->
       <form id="add-card-form">
-        <label for="question">Question: </label>
         <input
           type="text"
           name="answer"
@@ -73,7 +78,6 @@
           id="question"
           placeholder="Enter question... (front of the card)"
         />
-        <label for="answer">Answer: </label>
         <input
           type="text"
           name="answer"
@@ -92,6 +96,9 @@
         </div>
         <button type="button" id="save-cards" class="save-cards">
           <i class="fas fa-check"></i>
+        </button>
+        <button type="button" id="delete-cards" class="delete-cards">
+          <i class="fas fa-times"></i>
         </button>
       </form>
       <!-- FORM END -->

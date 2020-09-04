@@ -2,12 +2,14 @@ import { checkRegister, checkLogin } from "./register-login.js";
 // import { createMiniature } from "./display-miniatures.js";
 import { greatBritain, germany } from "./base64-imgs.js";
 import { initCarousel } from "./carousel.js";
+import { openCreatePage } from "./display-miniatures.js";
 
 // INDEX.HTML VARS
 const modalCloseBtnArr = document.querySelectorAll("#modal-close");
 const modalArr = document.querySelectorAll(".modal");
 const signUpBtn = document.querySelector("#sign-up");
 const logInBtn = document.querySelector("#log-in");
+const createNewBtn = document.querySelector("#create-new");
 
 const hardCodedCards = [
   {
@@ -122,6 +124,8 @@ window.addEventListener("click", (e) => {
     ? e.target.classList.remove("show")
     : false;
 });
+
+createNewBtn.addEventListener("click", openCreatePage);
 
 // Passes data-attribute through JS files i/e displays proper cards
 window.addEventListener("click", (e) => {
