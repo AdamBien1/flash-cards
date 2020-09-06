@@ -28,10 +28,14 @@ function displayThreeDecks(cardsArr, startID) {
       createMiniature(cardsArr[i]);
     }
   } else {
-    cardsArr.forEach((card) => {
-      createMiniature(card);
-    });
+    displayAllDecks(cardsArr);
   }
+}
+
+function displayAllDecks(cardsArr) {
+  cardsArr.forEach((card) => {
+    createMiniature(card);
+  });
 }
 
 function disableArrows(cardsArr) {
@@ -65,27 +69,31 @@ function clearMiniatures() {
   });
 }
 
-function initCarousel(cardsArr) {
-  let startID = 0;
-  displayCarouselBtns(moreThanThreeDecks());
-  displayThreeDecks(cardsArr, startID);
-  disableArrows(cardsArr);
+function initCarousel(cardsArr, screenWidth) {
+  if (screenWidth > 480) {
+    let startID = 0;
+    displayCarouselBtns(moreThanThreeDecks());
+    displayThreeDecks(cardsArr, startID);
+    disableArrows(cardsArr);
 
-  prevBtn.addEventListener("click", () => {
-    if (!prevBtn.classList.contains("disabled")) {
-      clearMiniatures();
-      startID--;
-      displayThreeDecks(cardsArr, startID);
-      disableArrows(cardsArr);
-    }
-  });
+    prevBtn.addEventListener("click", () => {
+      if (!prevBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID--;
+        displayThreeDecks(cardsArr, startID);
+        disableArrows(cardsArr);
+      }
+    });
 
-  nextBtn.addEventListener("click", () => {
-    if (!nextBtn.classList.contains("disabled")) {
-      clearMiniatures();
-      startID++;
-      displayThreeDecks(cardsArr, startID);
-      disableArrows(cardsArr);
-    }
-  });
+    nextBtn.addEventListener("click", () => {
+      if (!nextBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID++;
+        displayThreeDecks(cardsArr, startID);
+        disableArrows(cardsArr);
+      }
+    });
+  } else {
+    displayAllDecks(cardsArr);
+  }
 }

@@ -1,4 +1,5 @@
 import { customer } from "./base64-imgs.js";
+import { displaySignUp, displayLogIn, closeModals } from "./display-modals.js";
 
 const list = document.querySelector("#list");
 const form = document.querySelector("#add-card-form");
@@ -225,6 +226,11 @@ function saveInLocalStorage(cardsArr, modify) {
     window.location.replace("../html/index.html");
   }
 }
+
+// Modals
+displayLogIn();
+displaySignUp();
+closeModals();
 
 (function () {
   modify = JSON.parse(localStorage.getItem("modify"));

@@ -27,16 +27,46 @@
           <h4>Hello, <span id="user-name"> User</span></h4>
         </div>
         <div class="buttons">
-          <div class="btn btn-primary">
-            <a href="#" id="log-out" class="log-out"
-              >Log out
-              <div class="border border-1"></div>
-              <div class="border border-2"></div>
-              <div class="border border-3"></div>
-              <div class="border border-4"></div>
-            </a>
+          <!-- HAMBURGER START -->
+          <div class="menu-wrap">
+            <input type="checkbox" class="toggler" />
+            <div class="hamburger">
+              <div></div>
+            </div>
+            <div class="menu">
+              <div>
+                <div>
+                  <ul>
+                    <li>
+                      <div class="btn btn-hamburger">
+                        <a href="#" id="sign-up" class="sign-up"
+                          >Sign-up
+                          <div class="border border-1"></div>
+                          <div class="border border-2"></div>
+                          <div class="border border-3"></div>
+                          <div class="border border-4"></div>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-hamburger">
+                        <a href="#" id="log-in" class="log-in"
+                          >Sign-in
+                          <div class="border border-1"></div>
+                          <div class="border border-2"></div>
+                          <div class="border border-3"></div>
+                          <div class="border border-4"></div>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="btn show">
+          <!-- HAMBURGER END -->
+
+          <div class="btn btn-menu">
             <a href="#" id="sign-up" class="sign-up"
               >Sign-up
               <div class="border border-1"></div>
@@ -45,7 +75,7 @@
               <div class="border border-4"></div>
             </a>
           </div>
-          <div class="btn show">
+          <div class="btn btn-menu">
             <a href="#" id="log-in" class="log-in"
               >Sign-in
               <div class="border border-1"></div>
@@ -59,67 +89,7 @@
     </nav>
 
     <main class="container view-cards-container">
-      <div class="cards-container" id="cards-container">
-        <!-- <div class="card active">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              Whit is PHP?
-            </p>
-          </div>
-          <div class="inner-card-back">
-            <p>
-              a programming language
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              Whit is PHP?
-            </p>
-          </div>
-          <div class="inner-card-back">
-            <p>
-              a programming language
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              Whit is PHP?
-            </p>
-          </div>
-          <div class="inner-card-back">
-            <p>
-              a programming language
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              Whit is PHP?
-            </p>
-          </div>
-          <div class="inner-card-back">
-            <p>
-              a programming language
-            </p>
-          </div>
-        </div>
-      </div> -->
-      </div>
+      <div class="cards-container" id="cards-container"></div>
       <div class="navigation">
         <button id="prev" class="nav-button">
           <i class="fas fa-arrow-left"></i>
@@ -142,6 +112,137 @@
     </footer>
     <!-- FOOTER END -->
 
-    <script src="../js/view-cards.js"></script>
+    <!-- LOG IN MODAL -->
+    <div class="modal-container">
+      <div class="modal">
+        <button class="modal-close" id="modal-close">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-header">
+          <h3>Log In</h3>
+          <small class="info"
+            >This is only a showcase form for validation. No server
+            integrated.</small
+          >
+        </div>
+        <div class="modal-content">
+          Log in to see other users' cards and edit yours or
+          <a href="#">Sign up</a> and create your account.
+          <form class="modal-form">
+            <div>
+              <label for="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                id="log-in-username"
+                placeholder="Enter username..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="log-in-password"
+                placeholder="Enter password..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <!-- SUBMIT BTN -->
+            <div class="btn">
+              <a href="#" id="modal-log-in" class="modal-log-in">
+                Log In
+                <div class="border border-1"></div>
+                <div class="border border-2"></div>
+                <div class="border border-3"></div>
+                <div class="border border-4"></div>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END LOG IN MODAL -->
+
+    <!-- SIGN UP MODAL -->
+    <div class="modal-container">
+      <div class="modal">
+        <button class="modal-close" id="modal-close">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-header">
+          <h3>Sign Up</h3>
+          <small class="info"
+            >This is only a showcase form for validation. No server
+            integrated.</small
+          >
+        </div>
+        <div class="modal-content">
+          Register with us to create your own flash cards!
+          <form class="modal-form">
+            <div>
+              <label for="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                id="sign-up-username"
+                placeholder="Enter username..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="sign-up-email"
+                placeholder="Enter email..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="sign-up-password1"
+                placeholder="Enter password..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <div>
+              <label for="password">Confirm Password</label>
+              <input
+                type="password"
+                name="password"
+                id="sign-up-password2"
+                placeholder="Confirm Password..."
+                class="form-input"
+              />
+              <small>Error message</small>
+            </div>
+            <!-- SUBMIT BTN -->
+            <div class="btn">
+              <a href="#" id="modal-sign-up" class="modal-sign-up">
+                Sign Up
+                <div class="border border-1"></div>
+                <div class="border border-2"></div>
+                <div class="border border-3"></div>
+                <div class="border border-4"></div>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END SIGN UP MODAL -->
+
+    <script type="module" src="../js/view-cards.js"></script>
   </body>
 </html>

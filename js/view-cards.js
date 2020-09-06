@@ -1,3 +1,5 @@
+import { displaySignUp, displayLogIn, closeModals } from "./display-modals.js";
+
 // VIEW-CARDS.HTML VARS
 const cardsContainer = document.querySelector("#cards-container");
 const prevBtn = document.querySelector("#prev");
@@ -5,11 +7,21 @@ const nextBtn = document.querySelector("#next");
 const currentEl = document.querySelector("#current");
 const questionEl = document.querySelector("#question");
 const answerEl = document.querySelector("#answer");
+const hamburgerToggler = document.querySelector(".toggler");
 let passIndex;
 
 let currentActiveCard = 0;
 const cardsEl = [];
 const cardsData = getCardsData();
+
+// Disable scrolling on hamburger toggle
+hamburgerToggler.addEventListener("change", () => {
+  if (hamburgerToggler.checked) {
+    document.body.classList.add("stop-scrolling");
+  } else {
+    document.body.classList.remove("stop-scrolling");
+  }
+});
 
 // Shuffles to the next card
 nextBtn.addEventListener("click", () => {
@@ -83,6 +95,11 @@ function createCard(data, index) {
   cardsContainer.appendChild(card);
   updateCurrentText();
 }
+
+// Modals
+displaySignUp();
+displayLogIn();
+closeModals();
 
 // Searches for passIndex to display proper cards
 (function () {

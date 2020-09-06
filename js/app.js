@@ -3,6 +3,7 @@ import { checkRegister, checkLogin } from "./register-login.js";
 import { greatBritain, germany } from "./base64-imgs.js";
 import { initCarousel } from "./carousel.js";
 import { openCreatePage } from "./display-miniatures.js";
+import { displaySignUp, displayLogIn, closeModals } from "./display-modals.js";
 
 // INDEX.HTML VARS
 const modalCloseBtnArr = document.querySelectorAll("#modal-close");
@@ -10,6 +11,7 @@ const modalArr = document.querySelectorAll(".modal");
 const signUpBtn = document.querySelector("#sign-up");
 const logInBtn = document.querySelector("#log-in");
 const createNewBtn = document.querySelector("#create-new");
+const hamburgerToggler = document.querySelector(".toggler");
 
 const hardCodedCards = [
   {
@@ -85,44 +87,14 @@ const hardCodedCards = [
 // select cards deck ID
 let passIndex;
 
-// Display SIGN UP modal
-signUpBtn.addEventListener("click", () => {
-  modalArr[1].parentElement.classList.add("show");
-
-  const modalButton = document.querySelector("#modal-sign-up");
-  const username = document.querySelector("#sign-up-username");
-  const email = document.querySelector("#sign-up-email");
-  const password1 = document.querySelector("#sign-up-password1");
-  const password2 = document.querySelector("#sign-up-password2");
-
-  modalButton.addEventListener("click", () => {
-    checkRegister(username, email, password1, password2);
-  });
-});
-
-// Display LOG IN modal
-logInBtn.addEventListener("click", () => {
-  modalArr[0].parentElement.classList.add("show");
-
-  const modalButton = document.querySelector("#modal-log-in");
-  const username = document.querySelector("#log-in-username");
-  const password = document.querySelector("#log-in-password");
-
-  modalButton.addEventListener("click", () => {
-    checkLogin(username, password);
-  });
-});
-// Closes SIGN UP/ LOG IN modals on CLOSE-BTN click
-modalCloseBtnArr.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    modalArr[index].parentElement.classList.remove("show");
-  });
-});
-// Closes SIGN UP/ LOG IN modals on WINDOW click
-window.addEventListener("click", (e) => {
-  e.target.classList.contains("modal-container")
-    ? e.target.classList.remove("show")
-    : false;
+// Disable scrolling on hamburger toggle
+hamburgerToggler.addEventListener("change", () => {
+  if (hamburgerToggler.checked) {
+    document.body.classList.add("stop-scrolling");
+    console.log("class added");
+  } else {
+    document.body.classList.remove("stop-scrolling");
+  }
 });
 
 createNewBtn.addEventListener("click", openCreatePage);
@@ -137,6 +109,11 @@ window.addEventListener("click", (e) => {
   }
 });
 
+// Modals
+displayLogIn();
+displaySignUp();
+closeModals();
+
 // Store hard coded cards (basic english, basic german) in local storage
 (function () {
   if (localStorage.getItem("cards") === null) {
@@ -148,5 +125,6 @@ window.addEventListener("click", (e) => {
   //   createMiniature(card);
   // });
 
-  initCarousel(cards);
+  let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  initCarousel(cards, width);
 })();
