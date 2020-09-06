@@ -1,18 +1,23 @@
 import { createMiniature } from "./display-miniatures.js";
+import { greatBritain } from "./base64-imgs.js";
 
 export { initCarousel };
 
 const prevBtn = document.querySelector(".prev-arrow");
 const nextBtn = document.querySelector(".next-arrow");
 
-function moreThanThreeDecks() {
-  let nDecks = 0;
+function howManyCards(screenWidth) {
   const cards = JSON.parse(localStorage.getItem("cards"));
 
-  return cards.length > 3 ? true : false;
+  if (screenWidth > 768 && screenWidth <= 1024) {
+    return cards.length > 2 ? true : false;
+  } else if (screenWidth > 1024) {
+    return cards.length > 3 ? true : false;
+  }
 }
 
 function displayCarouselBtns(condition) {
+  console.log(condition);
   if (condition) {
     prevBtn.classList.add("show");
     nextBtn.classList.add("show");
@@ -22,20 +27,20 @@ function displayCarouselBtns(condition) {
   }
 }
 
-function displayThreeDecks(cardsArr, startID) {
-  if (moreThanThreeDecks()) {
+function displayDecks(cardsArr, startID, screenWidth) {
+  if (howManyCards(screenWidth) && screenWidth > 768 && screenWidth <= 1024) {
+    for (let i = startID; i <= startID + 1; i++) {
+      createMiniature(cardsArr[i]);
+    }
+  } else if (howManyCards(screenWidth) && screenWidth >= 1024) {
     for (let i = startID; i <= startID + 2; i++) {
       createMiniature(cardsArr[i]);
     }
   } else {
-    displayAllDecks(cardsArr);
+    cardsArr.forEach((card) => {
+      createMiniature(card);
+    });
   }
-}
-
-function displayAllDecks(cardsArr) {
-  cardsArr.forEach((card) => {
-    createMiniature(card);
-  });
 }
 
 function disableArrows(cardsArr) {
@@ -70,17 +75,18 @@ function clearMiniatures() {
 }
 
 function initCarousel(cardsArr, screenWidth) {
-  if (screenWidth > 480) {
+  if (screenWidth > 768 && screenWidth <= 1024) {
+    console.log("tablet " + howManyCards(screenWidth));
     let startID = 0;
-    displayCarouselBtns(moreThanThreeDecks());
-    displayThreeDecks(cardsArr, startID);
+    displayCarouselBtns(howManyCards(screenWidth));
+    displayDecks(cardsArr, startID, screenWidth);
     disableArrows(cardsArr);
 
     prevBtn.addEventListener("click", () => {
       if (!prevBtn.classList.contains("disabled")) {
         clearMiniatures();
         startID--;
-        displayThreeDecks(cardsArr, startID);
+        displayDecks(cardsArr, startID, screenWidth);
         disableArrows(cardsArr);
       }
     });
@@ -89,11 +95,38 @@ function initCarousel(cardsArr, screenWidth) {
       if (!nextBtn.classList.contains("disabled")) {
         clearMiniatures();
         startID++;
-        displayThreeDecks(cardsArr, startID);
+        console.log(startID);
+        displayDecks(cardsArr, startID, screenWidth);
+        disableArrows(cardsArr);
+      }
+    });
+  } else if (screenWidth > 1024) {
+    let startID = 0;
+    displayCarouselBtns(howManyCards(screenWidth));
+    displayDecks(cardsArr, startID, screenWidth);
+    disableArrows(cardsArr);
+
+    prevBtn.addEventListener("click", () => {
+      if (!prevBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID--;
+        displayDecks(cardsArr, startID, screenWidth);
+        disableArrows(cardsArr);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (!nextBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID++;
+
+        displayDecks(cardsArr, startID, screenWidth);
         disableArrows(cardsArr);
       }
     });
   } else {
-    displayAllDecks(cardsArr);
+    console.log("mobile");
+    let startID = 0;
+    displayDecks(cardsArr, startID, screenWidth);
   }
 }

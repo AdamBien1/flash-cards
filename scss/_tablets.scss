@@ -1,49 +1,10 @@
-@media (max-width: 480px) {
+@media (max-width: 1023px) {
   // NAVBAR START
   .navbar {
-    height: 50px;
-    padding: 0 1rem;
-    justify-content: center;
     margin-bottom: 1rem;
-
-    .logo {
-      i {
-        font-size: 1.2rem;
-        margin-right: 10px;
-      }
-
-      h1 {
-        font-size: 1.3rem;
-      }
-    }
 
     .profile {
       display: flex;
-
-      .user {
-        display: none;
-        margin-right: 10px;
-        font-size: 1rem;
-
-        i {
-          font-size: 1.1rem;
-        }
-      }
-
-      .buttons {
-        .menu-wrap {
-          display: block;
-          width: 50px;
-        }
-
-        .btn-menu {
-          display: none;
-        }
-
-        .btn-hamburger {
-          z-index: 3;
-        }
-      }
     }
   }
   // NAVBAR END
@@ -181,11 +142,11 @@
   }
 
   .cards-container {
-    transform: scale(0.9);
   }
 
   .create-cards-container {
+    min-width: 0 !important;
+    max-width: 600px;
     overflow: hidden;
-    transform: scale(0.9);
   }
 }
