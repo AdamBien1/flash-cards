@@ -1,3 +1,5 @@
+import { checkRegister, checkLogin } from "./register-login.js";
+
 const modalCloseBtnArr = document.querySelectorAll("#modal-close");
 const modalArr = document.querySelectorAll(".modal");
 const signUpBtn = document.querySelectorAll(".sign-up");

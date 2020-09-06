@@ -1,4 +1,3 @@
-import { checkRegister, checkLogin } from "./register-login.js";
 // import { createMiniature } from "./display-miniatures.js";
 import { greatBritain, germany } from "./base64-imgs.js";
 import { initCarousel } from "./carousel.js";
