@@ -148,16 +148,26 @@
     }
 
     .text-question {
+      text-align: left;
+      width: calc(100% - 41px);
       transform: translateY(0);
       opacity: 1;
       transition: 150ms all ease-in;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .text-answer {
+      text-align: left;
+      width: calc(100% - 30px - 41px);
       transition: 150ms all ease-in;
       position: absolute;
       transform: translateY(100%);
       opacity: 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     &:hover {

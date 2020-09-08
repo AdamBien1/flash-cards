@@ -1,10 +1,14 @@
+// ### IMPORTS & EXPORTS
 import { checkRegister, checkLogin } from "./register-login.js";
+export { displaySignUp, displayLogIn, closeModals };
 
-const modalCloseBtnArr = document.querySelectorAll("#modal-close");
+// ### VARIABLES ###
+const modalCloseBtnArr = document.querySelectorAll(".modal-close");
 const modalArr = document.querySelectorAll(".modal");
 const signUpBtn = document.querySelectorAll(".sign-up");
 const logInBtn = document.querySelectorAll(".log-in");
 
+// ### FUNCTIONS ###
 // Display SIGN UP modal
 function displaySignUp() {
   signUpBtn.forEach((btn) => {
@@ -54,6 +58,8 @@ function closeModals() {
       //   document.body.classList.remove("stop-scrolling");
     });
   });
+
+  // ### EVENT LISTENERS ###
   // Closes SIGN UP/ LOG IN modals on WINDOW click
   window.addEventListener("click", (e) => {
     if (e.target.classList.contains("modal-container")) {
@@ -62,5 +68,3 @@ function closeModals() {
     }
   });
 }
-
-export { displaySignUp, displayLogIn, closeModals };

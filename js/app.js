@@ -1,16 +1,15 @@
-// import { createMiniature } from "./display-miniatures.js";
+// ### IMPORTS & EXPORTS ###
 import { greatBritain, germany } from "./base64-imgs.js";
 import { initCarousel } from "./carousel.js";
 import { openCreatePage } from "./display-miniatures.js";
 import { displaySignUp, displayLogIn, closeModals } from "./display-modals.js";
 
-// INDEX.HTML VARS
-const modalCloseBtnArr = document.querySelectorAll("#modal-close");
-const modalArr = document.querySelectorAll(".modal");
-const signUpBtn = document.querySelector("#sign-up");
-const logInBtn = document.querySelector("#log-in");
+// ### VARIABLES ###
 const createNewBtn = document.querySelector("#create-new");
 const hamburgerToggler = document.querySelector(".toggler");
+let screenWidth;
+let screenType;
+let cards;
 
 const hardCodedCards = [
   {
@@ -83,14 +82,62 @@ const hardCodedCards = [
   },
 ];
 
-// select cards deck ID
-let passIndex;
+//  ### FUNCTIONS ###
+// Store hard coded cards (basic english, basic german) in local storage
+(function () {
+  if (localStorage.getItem("cards") === null) {
+    localStorage.setItem("cards", JSON.stringify(hardCodedCards));
+  }
+
+  cards = JSON.parse(localStorage.getItem("cards"));
+
+  screenWidth = screen.width;
+  if (parseInt(screenWidth) <= 768) screenType = "mobile";
+  else if (parseInt(screenWidth) < 1024) screenType = "tablet";
+  else if (parseInt(screenWidth) < 1440) screenType = "small screen";
+  else {
+    screenType = "big screen";
+    console.log(screenType);
+  }
+  initCarousel(cards, parseInt(screenWidth));
+})();
+
+// Funtions that displays and hides modals
+displayLogIn();
+displaySignUp();
+closeModals();
+
+// ### EVENT LISTENERS ###
+window.addEventListener("resize", () => {
+  screenWidth = screen.width;
+  // console.log("screen type: " + screenType + " " + screenWidth);
+  if (screenType !== "mobile" && parseInt(screenWidth) < 768) {
+    screenType = "mobile";
+    initCarousel(cards, screenWidth);
+  } else if (
+    screenType !== "tablet" &&
+    parseInt(screenWidth) < 1024 &&
+    parseInt(screenWidth) >= 768
+  ) {
+    screenType = "tablet";
+    initCarousel(cards, screenWidth);
+  } else if (
+    screenType !== "small screen" &&
+    parseInt(screenWidth) < 1440 &&
+    parseInt(screenWidth) >= 1024
+  ) {
+    screenType = "small screen";
+    initCarousel(cards, screenWidth);
+  } else if (screenType !== "big screen" && parseInt(screenWidth) >= 1440) {
+    screenType = "big screen";
+    initCarousel(cards, screenWidth);
+  }
+});
 
 // Disable scrolling on hamburger toggle
 hamburgerToggler.addEventListener("change", () => {
   if (hamburgerToggler.checked) {
     document.body.classList.add("stop-scrolling");
-    console.log("class added");
   } else {
     document.body.classList.remove("stop-scrolling");
   }
@@ -107,23 +154,3 @@ window.addEventListener("click", (e) => {
     localStorage.setItem("passIndex", passIndex);
   }
 });
-
-// Modals
-displayLogIn();
-displaySignUp();
-closeModals();
-
-// Store hard coded cards (basic english, basic german) in local storage
-(function () {
-  if (localStorage.getItem("cards") === null) {
-    localStorage.setItem("cards", JSON.stringify(hardCodedCards));
-  }
-
-  const cards = JSON.parse(localStorage.getItem("cards"));
-  // cards.forEach((card) => {
-  //   createMiniature(card);
-  // });
-
-  let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-  initCarousel(cards, width);
-})();

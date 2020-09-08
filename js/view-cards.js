@@ -1,12 +1,11 @@
+// ### IMPORTS & EXPORTS
 import { displaySignUp, displayLogIn, closeModals } from "./display-modals.js";
 
-// VIEW-CARDS.HTML VARS
+// ### VARIABLES ###
 const cardsContainer = document.querySelector("#cards-container");
 const prevBtn = document.querySelector("#prev");
 const nextBtn = document.querySelector("#next");
 const currentEl = document.querySelector("#current");
-const questionEl = document.querySelector("#question");
-const answerEl = document.querySelector("#answer");
 const hamburgerToggler = document.querySelector(".toggler");
 let passIndex;
 
@@ -14,55 +13,22 @@ let currentActiveCard = 0;
 const cardsEl = [];
 const cardsData = getCardsData();
 
-// Disable scrolling on hamburger toggle
-hamburgerToggler.addEventListener("change", () => {
-  if (hamburgerToggler.checked) {
-    document.body.classList.add("stop-scrolling");
-  } else {
-    document.body.classList.remove("stop-scrolling");
-  }
-});
+// ### FUNCTIONS ###
+// Searches for passIndex to display proper cards
+(function () {
+  passIndex = localStorage.getItem("passIndex");
+})();
+createCards();
 
-// Shuffles to the next card
-nextBtn.addEventListener("click", () => {
-  cardsEl[currentActiveCard].className = "card left";
-  currentActiveCard++;
+// Funtions that displays and hides modals
+displaySignUp();
+displayLogIn();
+closeModals();
 
-  if (currentActiveCard > cardsEl.length - 1) {
-    currentActiveCard = cardsEl.length - 1;
-  }
-
-  cardsEl[currentActiveCard].className = "card active";
-  updateCurrentText();
-});
-
-// Shuffles to the previous card
-prevBtn.addEventListener("click", () => {
-  cardsEl[currentActiveCard].className = "card right";
-  currentActiveCard--;
-
-  if (currentActiveCard < 0) {
-    currentActiveCard = 0;
-  }
-
-  cardsEl[currentActiveCard].className = "card active";
-  updateCurrentText();
-});
-
-// Updates index of card displayed
-function updateCurrentText() {
-  currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
-}
-
-// Returns cards data from LOCAL STORAGE
+// Returns cards data from LocalStorage
 function getCardsData() {
   const cards = JSON.parse(localStorage.getItem("cards"));
   return cards === null ? [] : cards;
-}
-
-// Displays cards in DOM
-function createCards() {
-  cardsData[passIndex].body.forEach((data, index) => createCard(data, index));
 }
 
 // Creates card element
@@ -96,15 +62,48 @@ function createCard(data, index) {
   updateCurrentText();
 }
 
-// Modals
-displaySignUp();
-displayLogIn();
-closeModals();
+// Displays cards in DOM
+function createCards() {
+  cardsData[passIndex].body.forEach((data, index) => createCard(data, index));
+}
 
-// Searches for passIndex to display proper cards
-(function () {
-  passIndex = localStorage.getItem("passIndex");
-})();
-console.log(passIndex);
-console.log(cardsData);
-createCards();
+// Updates index of card displayed
+function updateCurrentText() {
+  currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
+}
+
+// ### EVENT LISTENERS ###
+// Shuffles to the next card
+nextBtn.addEventListener("click", () => {
+  cardsEl[currentActiveCard].className = "card left";
+  currentActiveCard++;
+
+  if (currentActiveCard > cardsEl.length - 1) {
+    currentActiveCard = cardsEl.length - 1;
+  }
+
+  cardsEl[currentActiveCard].className = "card active";
+  updateCurrentText();
+});
+
+// Shuffles to the previous card
+prevBtn.addEventListener("click", () => {
+  cardsEl[currentActiveCard].className = "card right";
+  currentActiveCard--;
+
+  if (currentActiveCard < 0) {
+    currentActiveCard = 0;
+  }
+
+  cardsEl[currentActiveCard].className = "card active";
+  updateCurrentText();
+});
+
+// Disable scrolling on hamburger toggle
+hamburgerToggler.addEventListener("change", () => {
+  if (hamburgerToggler.checked) {
+    document.body.classList.add("stop-scrolling");
+  } else {
+    document.body.classList.remove("stop-scrolling");
+  }
+});

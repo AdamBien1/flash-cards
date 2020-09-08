@@ -1,38 +1,77 @@
+// ### IMPORTS & EXPORTS
 import { createMiniature } from "./display-miniatures.js";
-import { greatBritain } from "./base64-imgs.js";
 
 export { initCarousel };
 
+// ### VARIABLES ###
 const prevBtn = document.querySelector(".prev-arrow");
 const nextBtn = document.querySelector(".next-arrow");
 
-function howManyCards(screenWidth) {
-  const cards = JSON.parse(localStorage.getItem("cards"));
+// ### FUNCTIONS ###
+// initiates all of carousel components according to window size, given carousel is necessary to view all decks
+function initCarousel(cardsArr, screenWidth) {
+  clearMiniatures();
+  displayCarouselBtns(false);
+  if (screenWidth >= 1024 && screenWidth < 1440) {
+    let startID = 0;
+    displayCarouselBtns(howManyCards(screenWidth));
+    displayMiniatures(cardsArr, startID, screenWidth);
+    disableBtns(cardsArr);
 
-  if (screenWidth > 768 && screenWidth <= 1024) {
-    return cards.length > 2 ? true : false;
-  } else if (screenWidth > 1024) {
-    return cards.length > 3 ? true : false;
-  }
-}
+    prevBtn.addEventListener("click", () => {
+      if (!prevBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID--;
+        displayMiniatures(cardsArr, startID, screenWidth);
+        disableBtns(cardsArr);
+      }
+    });
 
-function displayCarouselBtns(condition) {
-  console.log(condition);
-  if (condition) {
-    prevBtn.classList.add("show");
-    nextBtn.classList.add("show");
+    nextBtn.addEventListener("click", () => {
+      if (!nextBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID++;
+        displayMiniatures(cardsArr, startID, screenWidth);
+        disableBtns(cardsArr);
+      }
+    });
+  } else if (screenWidth >= 1440) {
+    let startID = 0;
+    displayCarouselBtns(howManyCards(screenWidth));
+    displayMiniatures(cardsArr, startID, screenWidth);
+    disableBtns(cardsArr);
+
+    prevBtn.addEventListener("click", () => {
+      if (!prevBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID--;
+        displayMiniatures(cardsArr, startID, screenWidth);
+        disableBtns(cardsArr);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (!nextBtn.classList.contains("disabled")) {
+        clearMiniatures();
+        startID++;
+
+        displayMiniatures(cardsArr, startID, screenWidth);
+        disableBtns(cardsArr);
+      }
+    });
   } else {
-    prevBtn.classList.remove("show");
-    nextBtn.classList.remove("show");
+    let startID = 0;
+    displayMiniatures(cardsArr, startID, screenWidth);
   }
 }
 
-function displayDecks(cardsArr, startID, screenWidth) {
-  if (howManyCards(screenWidth) && screenWidth > 768 && screenWidth <= 1024) {
+// Displays as many deck miniatures to DOM, as window size  denotes
+function displayMiniatures(cardsArr, startID, screenWidth) {
+  if (howManyCards(screenWidth) && screenWidth >= 1024 && screenWidth < 1440) {
     for (let i = startID; i <= startID + 1; i++) {
       createMiniature(cardsArr[i]);
     }
-  } else if (howManyCards(screenWidth) && screenWidth >= 1024) {
+  } else if (howManyCards(screenWidth) && screenWidth >= 1440) {
     for (let i = startID; i <= startID + 2; i++) {
       createMiniature(cardsArr[i]);
     }
@@ -43,15 +82,34 @@ function displayDecks(cardsArr, startID, screenWidth) {
   }
 }
 
-function disableArrows(cardsArr) {
+// Gets rid of deck miniatures in DOM
+function clearMiniatures() {
+  const miniatures = document.querySelectorAll(".card-miniature");
+
+  miniatures.forEach((miniature) => {
+    miniature.remove();
+  });
+}
+
+// Determines if carousel buttons (next arrow, prev arrow) should be displayed
+function displayCarouselBtns(condition) {
+  if (condition) {
+    prevBtn.classList.add("show");
+    nextBtn.classList.add("show");
+  } else {
+    prevBtn.classList.remove("show");
+    nextBtn.classList.remove("show");
+  }
+}
+
+// Disables buttons (next arrow, prev arrow), when you can't select previous or next element
+function disableBtns(cardsArr) {
   let farLeftID = document
     .querySelector(".card-miniature")
     .getAttribute("data-cards-id");
   let farRightID = document
     .querySelector(".card-miniature:last-child")
     .getAttribute("data-cards-id");
-
-  console.log(farLeftID, farRightID);
 
   if (parseInt(farLeftID) === 0) {
     prevBtn.classList.add("disabled");
@@ -66,67 +124,13 @@ function disableArrows(cardsArr) {
   }
 }
 
-function clearMiniatures() {
-  const miniatures = document.querySelectorAll(".card-miniature");
+// Check how many card decks are stored in LocalStorage
+function howManyCards(screenWidth) {
+  const cards = JSON.parse(localStorage.getItem("cards"));
 
-  miniatures.forEach((miniature) => {
-    miniature.remove();
-  });
-}
-
-function initCarousel(cardsArr, screenWidth) {
-  if (screenWidth > 768 && screenWidth <= 1024) {
-    console.log("tablet " + howManyCards(screenWidth));
-    let startID = 0;
-    displayCarouselBtns(howManyCards(screenWidth));
-    displayDecks(cardsArr, startID, screenWidth);
-    disableArrows(cardsArr);
-
-    prevBtn.addEventListener("click", () => {
-      if (!prevBtn.classList.contains("disabled")) {
-        clearMiniatures();
-        startID--;
-        displayDecks(cardsArr, startID, screenWidth);
-        disableArrows(cardsArr);
-      }
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if (!nextBtn.classList.contains("disabled")) {
-        clearMiniatures();
-        startID++;
-        console.log(startID);
-        displayDecks(cardsArr, startID, screenWidth);
-        disableArrows(cardsArr);
-      }
-    });
-  } else if (screenWidth > 1024) {
-    let startID = 0;
-    displayCarouselBtns(howManyCards(screenWidth));
-    displayDecks(cardsArr, startID, screenWidth);
-    disableArrows(cardsArr);
-
-    prevBtn.addEventListener("click", () => {
-      if (!prevBtn.classList.contains("disabled")) {
-        clearMiniatures();
-        startID--;
-        displayDecks(cardsArr, startID, screenWidth);
-        disableArrows(cardsArr);
-      }
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if (!nextBtn.classList.contains("disabled")) {
-        clearMiniatures();
-        startID++;
-
-        displayDecks(cardsArr, startID, screenWidth);
-        disableArrows(cardsArr);
-      }
-    });
-  } else {
-    console.log("mobile");
-    let startID = 0;
-    displayDecks(cardsArr, startID, screenWidth);
+  if (screenWidth >= 1024 && screenWidth < 1440) {
+    return cards.length > 2;
+  } else if (screenWidth >= 1440) {
+    return cards.length > 3;
   }
 }

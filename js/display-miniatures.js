@@ -1,7 +1,11 @@
+// ### IMPORTS & EXPORTS ###
+export { createMiniature, openCreatePage };
+
+// ### VARIABLES ###
+const cardMiniatures = document.querySelector("#card-miniatures");
 let modify = false;
 
-const cardMiniatures = document.querySelector("#card-miniatures");
-
+// ### FUNCTIONS ###
 // Creates HTML card miniature in index.html
 function createMiniature(cardObject) {
   const div = document.createElement("div");
@@ -62,6 +66,8 @@ function createMiniature(cardObject) {
   cardMiniatures.appendChild(div);
 }
 
+// ### EVENT LISTENERS ###
+// Opens create-cards.html in modify mode
 window.openModifyPage = openModifyPage;
 function openModifyPage() {
   modify = true;
@@ -69,11 +75,10 @@ function openModifyPage() {
   window.location.replace("../html/create-cards.html");
 }
 
+// Opens create-cards.html in create mode
 window.openCreatePage = openCreatePage;
 function openCreatePage() {
   modify = false;
   localStorage.setItem("modify", modify);
   window.location.replace("../html/create-cards.html");
 }
-
-export { createMiniature, openCreatePage };
